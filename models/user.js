@@ -3,7 +3,7 @@
 var bcrypt = require('bcrypt');
 
 module.exports = function(sequelize, DataTypes) {
-  var user = sequelize.define('user', {
+  var user = sequelize.define('User', {
     email: {
       type: DataTypes.STRING,
       validate: {
@@ -29,6 +29,14 @@ module.exports = function(sequelize, DataTypes) {
           msg: 'Password must be between 8 and 99 characters'
         }
       }
+    },
+    balance: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    admin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
   }, {
     hooks: {
@@ -44,6 +52,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
+        models.User.belongsToMany(models.Auction, {through: "Bid"})
       }
     },
     instanceMethods: {
