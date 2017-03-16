@@ -24,14 +24,14 @@
           </div>
         </div>
         <div class="form-group col-md-4">
-          <label for="charity01">Charity 1</label>
-          <select class="form-control" id="charity01"  v-model="auctionData.charity01">
+          <label for="charity">Charity 1</label>
+          <select class="form-control" id="charity"  v-model="auctionData.charity">
             <option>1</option>
             <option>2</option>
             <option>3</option>
           </select>
         </div>
-        <div class="form-group col-md-4">
+        <!-- <div class="form-group col-md-4">
           <label for="charity02">Charity 2</label>
           <select class="form-control" id="charity02" v-model="auctionData.charity02">
             <option>1</option>
@@ -46,20 +46,32 @@
             <option>2</option>
             <option>3</option>
           </select>
-        </div>
+        </div> -->
+        <!-- <div class="form-group row col-md-6">
+          <label for="countdown">Countdown Seconds</label>
+            <input class="form-control" type="text" value="600" id="countdown" v-model="auctionData.countdown">
+        </div> -->
         <div class="form-group row col-md-6">
-          <label for="endDate">Date</label>
-            <input class="form-control" type="date" value="2011-08-19" id="endDate" v-model="auctionData.endDate">
+          <label for="endDate">End Date</label>
+            <input class="form-control" type="date" id="endDate" v-model="auctionData.endDate">
         </div>
-        <div class="form-group row col-md-6">
+        <div class="form-group row col-md-3">
+          <label for="endHour">End Hour</label>
+            <input class="form-control" type="text" id="endHour" v-model="auctionData.endHour">
+        </div>
+        <div class="form-group row col-md-3">
+          <label for="endMinute">End Minute</label>
+            <input class="form-control" type="text" id="endMinute" v-model="auctionData.endMinute">
+        </div>
+        <!-- <div class="form-group row col-md-6">
           <label for="endTime">Time</label>
             <input class="form-control" type="time" value="13:45:00" id="endTime" v-model="auctionData.endTime">
-        </div>
-        <div class="form-group">
+        </div> -->
+        <!-- <div class="form-group">
           <label for="exampleInputFile">File input</label>
           <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
           <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
-        </div>
+        </div> -->
         <button type="submit" class="btn btn-primary" @click="createAuction">Submit</button>
       </form>
       {{ auctionData }}
@@ -78,11 +90,13 @@
           retailPrice: '',
           minBid: '',
           maxBid: '',
-          charity01: '',
-          charity02: '',
-          charity03: '',
+          charity: '',
+          countdown: '',
+          hasEnded: false,
           endDate: '',
-          endTime: ''
+          // endTime: ''
+          endHour: '',
+          endMinute: ''
         }
       }
     },
@@ -96,15 +110,17 @@
           retailPrice: this.auctionData.retailPrice,
           minBid     : this.auctionData.minBid,
           maxBid     : this.auctionData.maxBid,
-          charity01  : this.auctionData.charity01,
-          charity02  : this.auctionData.charity02,
-          charity03  : this.auctionData.charity03,
+          charity    : this.auctionData.charity,
+          countdown  : this.auctionData.countdown,
+          hasEnded   : this.auctionData.hasEnded,
           endDate    : this.auctionData.endDate,
-          endTime    : this.auctionData.endTime
+          // endTime    : this.auctionData.endTime
+          endHour    : this.auctionData.endHour,
+          endMinute    : this.auctionData.endMinute
         };
         axios.post('api/admin/auction', verifyAuctionData)
         .then(function(response) {
-          console.log(response);
+          // console.log(response);
         })
         .catch(function(error) {
           console.log(error);

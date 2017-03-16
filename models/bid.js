@@ -4,7 +4,11 @@ module.exports = function(sequelize, DataTypes) {
     userId: DataTypes.INTEGER,
     auctionId: DataTypes.INTEGER,
     charity: DataTypes.INTEGER,
-    amount: DataTypes.INTEGER
+    amount: DataTypes.STRING,
+    hasCompleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   }, {
     classMethods: {
       associate: function(models) {

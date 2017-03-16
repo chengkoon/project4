@@ -5,17 +5,19 @@
     <li role="presentation"><router-link to="/">User<router-link></li>
   </ul> -->
   <ul class="nav nav-pills">
-  <router-link to="/home" tag="li"><a>Home</a></router-link>
-  <router-link to="/auctions" tag="li"><a>View Auctions</a></router-link>
-  <router-link to="/charge" tag="li"><a>Balance: {{ userInfo.balance }}</a></router-link>
+  <router-link to="/home" tag="li" active-class="active"><a>Home</a></router-link>
+  <router-link to="/auctions" tag="li" active-class="active"><a>Auctions</a></router-link>
+  <router-link to="/results" tag="li" active-class="active"><a>Results</a></router-link>
+  <router-link to="/charge" tag="li" active-class="active"><a>Balance: {{ userBalance }}</a></router-link>
   </ul>
 </template>
 
 <script>
-
+  import { eventBus } from './app';
   import axios from 'axios';
 
   export default {
+    props: ['userBalance'],
     data() {
       return {
         userInfo: ''
@@ -26,7 +28,13 @@
       .then((response) => {
         console.log("HELLLLLOOOOOOO");
         this.userInfo = response.data.user;
+
       });
+    },
+    created() {
+      eventBus.$on('balanceWasEdited', function(money) {
+        this.userBalance += money;
+      })
     }
   }
 

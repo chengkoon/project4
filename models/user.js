@@ -37,6 +37,10 @@ module.exports = function(sequelize, DataTypes) {
     admin: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
+    },
+    hasPlacedBid: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
   }, {
     hooks: {
@@ -52,7 +56,9 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
-        models.User.belongsToMany(models.Auction, {through: "Bid"})
+        // models.User.belongsToMany(models.Auction, {through: "Bid"})
+        // models.User.hasOne(models.Bid)
+        models.User.belongsToMany(models.Charity, {through: "Donation"})
       }
     },
     instanceMethods: {

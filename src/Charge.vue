@@ -1,14 +1,37 @@
 <template>
   <div>
-    <button type="button" name="fivebucks">Five</button>
-    <button type="button" name="tenbucks">Ten</button>
-    <button type="button" name="fiftybucks">Fifty</button>
+    <button type="button" @click="topUpBalance(5)">Five</button>
+    <button type="button" @click="topUpBalance(10)">Ten</button>
+    <button type="button" @click="topUpBalance(50)">Fifty</button>
   </div>
 </template>
 
 <script>
-export default {
-}
+  import { eventBus } from './app';
+  import axios from 'axios';
+
+  export default {
+    props: ['userBalance'],
+    data() {
+      return {
+        balance: 0
+      }
+    },
+    methods: {
+      topUpBalance: function(money) {
+        let money2 = money + this.userBalance;
+        axios.put('/api/user/balance', { topup: money2 })
+        .then((response) => {
+          console.log("topUpBalance req sent!");
+          // this.$emit('balanceWasEdited', money);
+          eventBus.$emit('balanceWasEdited', money);
+        })
+        .catch(function(error) {
+          console.log(error);
+        })
+      }
+    }
+  }
 </script>
 
 <style lang="css">

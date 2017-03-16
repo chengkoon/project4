@@ -5,11 +5,10 @@
   "main": "index.js",
   "scripts": {
     "prestart": "npm run build:js",
-    "start": "node index.js",
     "serve": "nodemon index.js",
     "build:js": "browserify src/app.js -t vueify -p [ vueify/plugins/extract-css -o public/styles.bundle.css ] -t babelify -o public/app.bundle.js",
     "watch:js": "watchify src/app.js -t vueify -t babelify -p browserify-hmr -p [ vueify/plugins/extract-css -o public/styles.bundle.css ] -o public/app.bundle.js",
-    "dev": "concurrently \"npm run serve\" \"npm run watch:js\"",
+    "start": "concurrently \"npm run serve\" \"npm run watch:js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

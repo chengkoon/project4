@@ -6,17 +6,15 @@ module.exports = function(sequelize, DataTypes) {
     retailPrice: DataTypes.INTEGER,
     minBid: DataTypes.INTEGER,
     maxBid: DataTypes.INTEGER,
-    charity01: DataTypes.INTEGER,
-    charity02: DataTypes.INTEGER,
-    charity03: DataTypes.INTEGER,
-    endDate: DataTypes.DATE,
-    endTime: DataTypes.TIME,
-    hasEnded: DataTypes.BOOLEAN
+    charity: DataTypes.INTEGER,
+    hasEnded: DataTypes.BOOLEAN,
+    endDate: DataTypes.DATEONLY,
+    endHour: DataTypes.INTEGER,
+    endMinute: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
-        models.Auction.belongsToMany(models.User, {through: "Bid"})
       }
     }
   });

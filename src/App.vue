@@ -11,38 +11,88 @@
     <div class="row">
       <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
         <h1>Tikam tikam</h1>
+        timeNow: {{ now }}
+        month: {{ month }}
+        time now: {{ hours | two_digits }}:{{ minutes | two_digits }}:{{ seconds | two_digits }}
         <hr>
-        <appHeader v-if="admin"></appHeader>
-        <UserHeader v-if="!admin"></UserHeader>
-        <router-view></router-view>
+        <AdminHeader v-if="admin"></AdminHeader>
+        <UserHeader v-if="!admin" :userBalance="balance"></UserHeader>
+        <router-view :userBalance="balance"></router-view>
+
       </div>
-      {{ admin }}
       <br>
     </div>
   </div>
 </template>
 
 <script>
-  import Header from './Header.vue'
-  import UserHeader from './UserHeader.vue'
+
+  import AdminHeader from './AdminHeader.vue';
+  import UserHeader from './UserHeader.vue';
+  import Charge from './Charge.vue';
+  import { eventBus } from './app';
   import axios from 'axios';
 
   export default {
     components: {
-      appHeader: Header,
-      UserHeader: UserHeader
+      AdminHeader: AdminHeader,
+      UserHeader: UserHeader,
+      Charge: Charge
     },
     data: () => ({
-      admin: ''
+      admin: '',
+      userInfo: '',
+      balance: 0,
+      now: Math.trunc((new Date()).getTime() / 1000),
+      month: (new Date()).getMonth(),
+      message: 'hihihi'
     }),
     beforeMount() {
       axios.get('/api/admin')
       .then((response) => {
-        console.log(response.data);
         this.admin = response.data.admin;
       });
+      axios.get('/api/user')
+      .then((response) => {
+        console.log("HELLLLLOOOOOOO from mother app", response.data.user);
+        this.userInfo = response.data.user;
+        this.balance = response.data.user.balance;
+        eventBus.$emit('balanceWasRetrieved', this.balance);
+      });
+    },
+    mounted() {
+      let vm = this;
+      let updateTime = setInterval(function() {
+        vm.now = Math.trunc((new Date()).getTime() / 1000);
+      }, 1000)
+    },
+    computed: {
+      seconds() {
+        return (this.now % 60);
+      },
+      minutes() {
+        return parseInt((this.now / 60) % 60);
+      },
+      hours() {
+        return parseInt((this.now / 60 / 60) % 24);
+      },
+    },
+    created() {
+      let vm = this;
+      eventBus.$on('balanceWasEdited', function(money) {
+        vm.balance += money;
+      })
+    },
+    filters: {
+      two_digits: function(value) {
+        if (value.toString().length <= 1) {
+          return "0"+value.toString();
+        }
+          return value.toString();
+      }
     }
   }
+
 </script>
 
 <style>
