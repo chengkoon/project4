@@ -14,6 +14,6 @@
     "dialect": "postgres"
   },
   "production": {
-    "use_env_variable": "postgres://wvkxiwpmjdihrw:43886d24c53ed50a4eeaf53c7de6bf9f286ec1284d279133c51a17ec3bb90d8d@ec2-23-21-227-73.compute-1.amazonaws.com:5432/db1ji28hq0ldn6"
+    "use_env_variable": "postgres://lwmrgweymjpdld:bcef3d0c5f461f7dd785c2373552b980646ab138739529a14bdcf09ac13a3c43@ec2-107-20-195-181.compute-1.amazonaws.com:5432/d3aplaar2rumuj"
   }
 }
