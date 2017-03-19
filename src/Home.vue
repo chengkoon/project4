@@ -1,9 +1,8 @@
 <template>
     <div>
-        <h1>The Home Page</h1>
+        <h3>Want to win something at a fraction of its retail price?</h3>
         <hr>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab asperiores, aut autem, blanditiis consequuntur
-            dolore excepturi laborum maiores minima nihil non nulla obcaecati quas quibusdam quod sed suscipit vero
-            voluptatem.</p>
+        <p>Bid for an item and if your bidding price happens to be the
+        <br><b>highest unique bid</b>, the auction item is yours to keep!</p>
     </div>
 </template>

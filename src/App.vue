@@ -11,12 +11,12 @@
     <div class="row">
       <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
         <h1>Tikam tikam</h1>
-        timeNow: {{ now }}
-        month: {{ month }}
-        time now: {{ hours | two_digits }}:{{ minutes | two_digits }}:{{ seconds | two_digits }}
-        <hr>
+        Hi {{ userInfo.name }}
+        <br>Time now is: {{ hours + 8 | two_digits }}:{{ minutes | two_digits }}:{{ seconds | two_digits }} Hrs
+
         <AdminHeader v-if="admin"></AdminHeader>
         <UserHeader v-if="!admin" :userBalance="balance"></UserHeader>
+        <hr>
         <router-view :userBalance="balance"></router-view>
 
       </div>

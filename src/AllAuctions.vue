@@ -34,10 +34,10 @@
     </div>
 
 
-    <br>
+    <!-- <br>
     userInfo: {{ userInfo }}
     <br>
-    auctionInfo: {{ ongoingAuction }}
+    auctionInfo: {{ ongoingAuction }} -->
 
 
   </div>

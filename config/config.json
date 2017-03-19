@@ -18,6 +18,7 @@
     "password": null,
     "database": "tikamForCharity_production",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "use_env_variable": "postgres://wvkxiwpmjdihrw:43886d24c53ed50a4eeaf53c7de6bf9f286ec1284d279133c51a17ec3bb90d8d@ec2-23-21-227-73.compute-1.amazonaws.com:5432/db1ji28hq0ldn6"
   }
 }
