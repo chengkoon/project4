@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config({ silent: true });
 var express = require('express');
 var session = require('express-session');
 var ejsLayouts = require('express-ejs-layouts');
