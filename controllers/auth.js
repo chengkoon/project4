@@ -9,7 +9,7 @@ router.get('/signup', function(req, res) {
 });
 
 router.post('/signup', function(req, res) {
-  db.user.findOrCreate({
+  db.User.findOrCreate({
     where: { email: req.body.email },
     defaults: {
       name: req.body.name,
@@ -19,7 +19,7 @@ router.post('/signup', function(req, res) {
     if (created) {
       // replace the contents of this if statement with the code below
       passport.authenticate('local', {
-        successRedirect: '/',
+        successRedirect: '/home',
         successFlash: 'Account created and logged in'
       })(req, res);
     } else {
@@ -39,7 +39,7 @@ router.get('/login', function(req, res) {
 });
 
 router.post('/login', passport.authenticate('local', {
-  successRedirect: '/',
+  successRedirect: '/home',
   failureRedirect: '/auth/login',
   failureFlash: 'Invalid username and/or password',
   successFlash: 'You have logged in'
