@@ -15,7 +15,7 @@ passport.serializeUser(function(user, cb) {
  * and looking it up in the database
  */
 passport.deserializeUser(function(id, cb) {
-  db.user.findById(id).then(function(user) {
+  db.User.findById(id).then(function(user) {
     cb(null, user);
   }).catch(cb);
 });
@@ -40,11 +40,11 @@ passport.deserializeUser(function(id, cb) {
  * second argument. We can provide "null" if there's no error, or "false" if
  * there's no user.
  */
-passport.use(new LocalStrategy({
+passport.use('local', new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password'
 }, function(email, password, cb) {
-  db.user.find({
+  db.User.find({
     where: { email: email }
   }).then(function(user) {
     if (!user || !user.validPassword(password)) {
@@ -54,6 +54,21 @@ passport.use(new LocalStrategy({
     }
   }).catch(cb);
 }));
+
+// passport.use('admin-local', new LocalStrategy({
+//   usernameField: 'name',
+//   passwordField: 'password'
+// }, function(name, password, cb) {
+//   db.admin.find({
+//     where: { name: name }
+//   }).then(function(admin) {
+//     if (!admin || !admin.validPassword(password)) {
+//       cb(null, false);
+//     } else {
+//       cb(null, admin);
+//     }
+//   }).catch(cb);
+// }));
 
 // export the Passport configuration from this module
 module.exports = passport;

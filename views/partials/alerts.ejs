@@ -1,10 +1,10 @@
 <% if (alerts.error) { %>
   <% alerts.error.forEach(function(msg) { %>
-    <div class="alert alert-danger"><%= msg %></div>
+    <div class="alert alert-danger col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3"><%= msg %></div>
   <% }); %>
 <% } %>
 <% if (alerts.success) { %>
   <% alerts.success.forEach(function(msg) { %>
-    <div class="alert alert-success"><%= msg %></div>
+    <div class="alert alert-success col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3"><%= msg %></div>
   <% }); %>
 <% } %>
