@@ -58,7 +58,7 @@ module.exports = function(sequelize, DataTypes) {
         // associations can be defined here
         // models.User.belongsToMany(models.Auction, {through: "Bid"})
         // models.User.hasOne(models.Bid)
-        models.User.belongsToMany(models.Charity, {through: "Donation"})
+        // models.User.belongsToMany(models.Charity, {through: "Donation"})
       }
     },
     instanceMethods: {
