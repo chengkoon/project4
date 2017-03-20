@@ -54,4 +54,6 @@ app.use('/api', isLoggedIn, require('./controllers/api'));
 
 var server = app.listen(process.env.PORT || 3000);
 
+console.log("the server is now...", server);
+
 module.exports = server;
