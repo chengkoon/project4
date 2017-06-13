@@ -120,7 +120,7 @@
         };
         axios.post('api/admin/auction', verifyAuctionData)
         .then(function(response) {
-          // console.log(response);
+          alert('Auction event created!');
         })
         .catch(function(error) {
           console.log(error);
