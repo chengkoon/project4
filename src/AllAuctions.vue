@@ -18,7 +18,7 @@
           <!-- <select class="form-control" id="secretBid" v-model="selectedBid">
             <option v-for="number in bidRange(ongoingAuction.minBid,ongoingAuction.maxBid)">{{number}}</option>
           </select> -->
-          <input type="text" name="" v-model="selectedBid" placeholder="e.g. 1.15">
+          <input type="text" v-model="selectedBid" placeholder="e.g. 1.15">
           <div v-if="!userInfo.hasPlacedBid && !isAuctionOver">
           <button type="submit" class="btn btn-primary" @click="createBid">Place Bid!</button>
           </div>
@@ -50,7 +50,7 @@
     data() {
       return {
         ongoingAuction: false,
-        selectedBid: 0,
+        selectedBid: '',
         timeNowValue: 0,
         now: Math.trunc((new Date()).getTime() / 1000),
         userInfo: {}
@@ -118,25 +118,26 @@
       createBid() {
         event.preventDefault();
         // console.log("auctionId is...", auctionId);
-        let vm = this;
-        let verifyBidData = {
-          auctionId: vm.ongoingAuction.id,
-          charity: 1,
-          amount: this.selectedBid
-        };
-        axios.post('/api/user/bid', verifyBidData)
-        .then(function(response) {
-          //get back the result
-          console.log("response gotten back from after bidding is...",response.data);
-          vm.getUserInfo();
-        })
-        .catch(function(error) {
-          console.log(error);
-        })
-        // axios.get('/api/user')
-        // .then(function(user) {
-        //   vm.userInfo.hasPlacedBid = user.data.user.hasPlacedBid;
-        // })
+        if ((this.selectedBid >= this.ongoingAuction.minBid) && (this.selectedBid < this.ongoingAuction.maxBid)) {
+          let vm = this;
+          let verifyBidData = {
+            auctionId: vm.ongoingAuction.id,
+            charity: 1,
+            amount: this.selectedBid
+          };
+          axios.post('/api/user/bid', verifyBidData)
+          .then(function(response) {
+            //get back the result
+            console.log("response gotten back from after bidding is...",response.data);
+            vm.getUserInfo();
+          })
+          .catch(function(error) {
+            console.log(error);
+          })
+        }
+        else {
+          alert('Please place a bid that is within the bid range')
+        }
       },
       getUserInfo() {
         axios.get('/api/user')
