@@ -1,4 +1,4 @@
-const db = require('../models');
+  const db = require('../models');
 const passport = require('../config/ppConfig');
 const express = require('express');
 const apiRoutes = express.Router();
